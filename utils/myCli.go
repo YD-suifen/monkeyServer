@@ -9,10 +9,12 @@ import (
 
 func SqlxCli() *sqlx.DB {
 
-	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", Config.DbUser,Config.DbPass,Config.DbHost,Config.DbName)
+	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", Config.DB.DbUser,Config.DB.DbPass,Config.DB.DbHost,Config.DB.DbName)
 	if dbClient, err := sqlx.Connect("mysql", dns); err != nil{
 		logUtils.Errorf("mysql connect error=%v",err)
 	}else {
+		dbClient.SetMaxOpenConns(200)
+		dbClient.SetMaxIdleConns(20)
 		return dbClient
 	}
 	return nil

@@ -8,50 +8,28 @@ type HostData struct {
 	TypeName string `json:"typeName"`
 }
 
-type TvRequest struct {
-	KeyName string `json:"keyName"`
-	Type int `json:"type"`
-	StartTime int64 `json:"startTime"`
-	EndTime int64 `json:"endTime"`
+
+
+type TvDashBoardTrend struct {
+	TypeValue int `json:"typeValue"`
+	Data interface{} `json:"data"`
 }
 
-type TvCpuRespone struct {
-	HostName string `json:"hostName" db:"hostName"`
-	UsedCpu float64 `json:"usedCpu" db:"usedCpu"`
-	IdleCpu float64 `json:"idleCpu" db:"idleCpu"`
-	TimeUnix int64 `json:"timeUnix" db:"timeUnix"`
-}
-
-type TvMemRespone struct {
-	HostName string `json:"hostName" db:"hostName"`
-	Total float64 `json:"total" db:"total"`
-	Used float64 `json:"used" db:"used"`
-	Free float64 `json:"free" db:"free"`
-	TimeUnix int64 `json:"timeUnix" db:"timeUnix"`
-}
-
-type TvDiskDB struct {
-	HostName string `json:"hostName" db:"hostName"`
-	Disk string `json:"disk" db:"disk"`
-	TimeUnix int64 `json:"timeUnix" db:"timeUnix"`
-}
-
-type Disk struct {
-	DevName string `json:"devName" db:"devName"`
-	Total float64 `json:"total" db:"total"`
-	Used float64 `json:"used" db:"used"`
-	Free float64 `json:"free" db:"free"`
-}
-
-type TvDiskRespone struct {
+type DataStruck struct {
 	HostName string `json:"hostName"`
-	Disks []Disk `json:"disks"`
-	TimeUnix int64 `json:"timeUnix"`
+	KeyName string `json:"keyName"`
+	Used float64 `json:"used"`
+	State bool `json:"state"`
 }
 
-type TvTcpNetRespone struct {
-	HostName string `json:"hostName" db:"hostName"`
-	AllConn int `json:"allConn" db:"allConn"`
-	Established int `json:"established" db:"established"`
-	TimeUnix int64 `json:"timeUnix" db:"timeUnix"`
+type DataDiskStruck struct {
+	Disks []Disk `json:"disks"`
 }
+
+
+
+
+//type TrendDashBoardRespone struct {
+//	TypeValue int `json:"typeValue"`
+//	Data interface{} `json:"data"`
+//}

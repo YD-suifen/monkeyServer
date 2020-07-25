@@ -15,6 +15,7 @@ func CpuCa(time int64) []dataTypeStruck.Cacpu {
 	var data []dataTypeStruck.Cacpu
 
 	sql := fmt.Sprintf("select hostName,keyName,usedCpu,timeUnix from monkey_s_cpudata where timeUnix = %v",time)
+	logUtils.Debugf("CpuCa sql=%v",sql)
 	if err := db.Select(&data,sql);err != nil{
 		logUtils.Errorf("CpuCa Time=%v,error=%v",time,err)
 		return nil

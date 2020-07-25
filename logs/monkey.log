@@ -20,3 +20,31 @@
 2020-07-18T19:08:44.002+0800	INFO	monkeyServer/main.go:35	log init ok
 2020-07-18T19:08:44.003+0800	INFO	monkeyServer/main.go:44	config init ok
 2020-07-18T19:08:44.003+0800	INFO	monkeyServer/main.go:49	host ColleData start
+2020-07-22T18:32:50.005+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-22T18:32:50.008+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-22T18:32:50.008+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-22T18:32:50.008+0800	INFO	monkeyServer/main.go:45	host ColleData start
+2020-07-24T11:57:20.593+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-24T11:57:20.594+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-24T11:57:20.594+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-24T11:57:20.594+0800	INFO	monkeyServer/main.go:45	host ColleData start
+2020-07-24T12:26:13.236+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-24T12:26:13.238+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-24T12:26:13.238+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-24T12:26:13.238+0800	INFO	monkeyServer/main.go:45	host ColleData start
+2020-07-24T12:27:16.224+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-24T12:27:16.225+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-24T12:27:16.225+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-24T12:27:16.225+0800	INFO	monkeyServer/main.go:45	host ColleData start
+2020-07-24T12:28:23.988+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-24T12:28:23.989+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-24T12:28:23.990+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-24T12:28:23.990+0800	INFO	monkeyServer/main.go:45	host ColleData start
+2020-07-24T12:28:46.262+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-24T12:28:46.264+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-24T12:28:46.264+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-24T12:28:46.264+0800	INFO	monkeyServer/main.go:45	host ColleData start
+2020-07-24T12:36:25.077+0800	INFO	monkeyServer/main.go:33	log init ok
+2020-07-24T12:36:25.078+0800	INFO	monkeyServer/main.go:41	config init ok
+2020-07-24T12:36:25.078+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-24T12:36:25.078+0800	INFO	monkeyServer/main.go:45	host ColleData start

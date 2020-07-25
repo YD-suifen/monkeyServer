@@ -13,7 +13,18 @@ func CreateTable(tableName string) string {
 	defer db.Close()
 
 	Table := tableName+ "_" + utils.Todaydate()
-	tableStruck := "(id int(100) AUTO_INCREMENT,hostName varchar(100),keyName varchar(50),MaxValue float DEFAULT '0',MinValue float DEFAULT '0',timeUnix int(100),PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;"
+	//CREATE TABLE `monkey_s_diskdata` (
+	//	`id` int(100) NOT NULL AUTO_INCREMENT,
+	//	`hostName` varchar(100) NOT NULL,
+	//	`keyName` varchar(50) NOT NULL,
+	//	`privateIp` varchar(100) NOT NULL,
+	//	`disk` varchar(500) DEFAULT '',
+	//	`timeUnix` int(100) NOT NULL,
+	//	PRIMARY KEY (`id`)
+	//) ENGINE=InnoDB AUTO_INCREMENT=46376 DEFAULT CHARSET=utf8
+
+
+	tableStruck := "(id int(100) NOT NULL AUTO_INCREMENT,hostName varchar(100),keyName varchar(50),maValue float DEFAULT '0',miValue float DEFAULT '0',timeUnix int(100),PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8"
 
 	sql := "create table " + Table + tableStruck
 
@@ -25,11 +36,11 @@ func CreateTable(tableName string) string {
 	return Table
 }
 
-func Insert(tableName, keyName string,max,min float64,timeUnix int64) bool {
+func Insert(tableName,hostName, keyName string,max,min float64,timeUnix int64) bool {
 	db := utils.SqlxCli()
 	defer db.Close()
 	
-	sql := fmt.Sprintf("insert into %v (hostName,keyName,MaxValue,MinValue,timeUnix) value ('%v',%v,%v,%v,)",tableName,keyName,max,min,timeUnix)
+	sql := fmt.Sprintf("insert into %v (hostName,keyName,maValue,miValue,timeUnix) value ('%v','%v',%v,%v,%v)",tableName,hostName,keyName,max,min,timeUnix)
 	logUtils.Debugf("Insert sql=%v", sql)
 	if _, err := db.Exec(sql); err != nil {
 		logUtils.Error("Insert err=%v", err)

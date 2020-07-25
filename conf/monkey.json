@@ -2,8 +2,13 @@
 {
   "master" : "127.0.0.1",
   "port" : 9534,
-  "dbHost":"172.16.204.173",
-  "dbUser": "devops",
-  "dbName": "suifengapi",
-  "dbPass": "CXbjol2Jah5FkcUB"
+  "db" :{
+      "dbHost":"172.16.204.173",
+      "dbUser": "devops",
+      "dbName": "suifengapi",
+      "dbPass": "CXbjol2Jah5FkcUB"
+  },
+  "tasks": {
+    "trend" : "0 03 10 * * ?"
+  }
 }

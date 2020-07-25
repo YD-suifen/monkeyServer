@@ -9,7 +9,7 @@ import (
 func TvHourTimeUnix() (int64,int64) {
 	nowMinUnix := time.Now().Unix()
 	endTime := nowMinUnix - nowMinUnix % 60
-	startTime := endTime - 180
+	startTime := endTime - 30 * 60
 	return startTime, endTime
 }
 
@@ -34,6 +34,13 @@ func Todaydate() string {
 
 	t := time.Now()
 	nowday := fmt.Sprintf("%s_%02d_%s", strconv.Itoa(t.Year()), t.Month(), strconv.Itoa(t.Day()))
+	return nowday
+
+}
+func Yesterday() string {
+
+	t := time.Now()
+	nowday := fmt.Sprintf("%s_%02d_%s", strconv.Itoa(t.Year()), t.Month(), strconv.Itoa(t.Day()-1))
 	return nowday
 
 }

@@ -23,10 +23,18 @@ type Catcpnet struct {
 }
 
 
+//type StandData struct {
+//	HostName string `json:"hostName" db:"hostName"`
+//	KeyName string `json:"keyName" db:"keyName"`
+//	MaxValue float64 `json:"maxValue" db:"maValue"`
+//	MinValue float64 `json:"minValue" db:"miValue"`
+//	TimeUnix int64 `json:"timeUnix" db:"timeUnix"`
+//}
+
 type StandData struct {
-	HostName string `json:"hostName" db:"hostName"`
-	KeyName string `json:"keyName" db:"keyName"`
-	MaxValue float64 `json:"maxValue" db:"maxValue"`
-	MinValue float64 `json:"minValue" db:"minValue"`
-	TimeUnix int64 `json:"timeUnix" db:"timeUnix"`
+	HostName string `db:"hostName"`
+	KeyName string `db:"keyName"`
+	MaxValue float64 `db:"maValue"`
+	MinValue float64 `db:"miValue"`
+	TimeUnix int64 `db:"timeUnix"`
 }

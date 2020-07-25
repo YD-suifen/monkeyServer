@@ -6,8 +6,14 @@ import (
 )
 
 
-func RegistRouter(r *gin.Engine)  {
 
-	r.POST("/dashboard", api.Dashboard)
+func RegistRouter()  {
 
+	r := gin.Default()
+
+	dashboard := r.Group("/dashboard")
+	{
+		dashboard.POST("/trend",api.Trend)
+	}
+	r.Run(":9534")
 }

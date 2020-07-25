@@ -3,29 +3,28 @@ package utils
 import (
 	"github.com/robfig/cron/v3"
 	"monkeyServer/logUtils"
-	"monkeyServer/server/Calculation"
 )
 
 
-var Crontab *cron.Cron
+//var Crontab *cron.Cron
 
 
 
-func init()  {
+func TasksInit() *cron.Cron {
 	logUtils.Info("init Crontab")
 
-	Crontab = cron.New(cron.WithSeconds())
-	Crontab.Start()
+	Crontab := cron.New(cron.WithSeconds())
 
+	return Crontab
 }
 
-func AddTasks() {
-
-	spec := "0 0 12 * * ?"
-	_, err := Crontab.AddFunc(spec, func() {
-		Calculation.Algorithm()
-	})
-	if err != nil{
-		logUtils.Errorf("AddTasks error=%v",err)
-	}
-}
+//func AddTasks()  {
+//	spec := "0 40 17 * * ?"
+//	_, err := Crontab.AddFunc(spec, func() {
+//		Calculation.Algorithm()
+//	})
+//	if err != nil{
+//		logUtils.Errorf("AddTasks error=%v",err)
+//	}
+//
+//}

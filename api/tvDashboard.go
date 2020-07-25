@@ -9,14 +9,12 @@ import (
 
 
 
-func Dashboard(c *gin.Context)  {
+func Trend(c *gin.Context)  {
 	data, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil{
 		c.JSON(http.StatusOK,gin.H{"error":err})
 	}else {
-		jsonData := dashboard.Dashboard(data)
-		c.JSON(http.StatusOK, gin.H{
-			"json": jsonData,
-		})
+		jsonData := dashboard.Trend(data)
+		c.JSON(http.StatusOK, jsonData)
 	}
 }

@@ -2,41 +2,93 @@ package dashboard
 
 import (
 	"encoding/json"
-	"fmt"
 	"monkeyServer/dao"
 	"monkeyServer/dataTypeStruck"
+	"monkeyServer/judgment/trend"
 	"monkeyServer/utils"
 )
 
 
+type RequestTred dataTypeStruck.TrendDashboardRequest
+type Respone dataTypeStruck.Respone
 
-type DashboardPost struct {
-	City string `json:"city"`
-	Id int `json:"Id"`
+func Trend(jsonData []byte) dataTypeStruck.TrendDashboardRespone {
+
+	var requestData RequestTred
+	_ =json.Unmarshal(jsonData,&requestData)
+	return requestData.TrendRequest()
 }
 
 
+func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
 
-func (c *DashboardPost) Update() []byte {
+	var ResponeData []dataTypeStruck.Respone
+	var data dataTypeStruck.TrendDashboardRespone
+	var diskData []dataTypeStruck.DiskRespone
+	var DataRespone map[string][]dataTypeStruck.TrendRespone
 
-	var request dataTypeStruck.TvRequest
-	startTime,endTime := utils.TvHourTimeUnix()
-	request.KeyName = c.City
-	request.Type = c.Id
-	request.StartTime = startTime
-	request.EndTime = endTime
-	return dao.Get(request)
-
-}
-
-
-func Dashboard(jsonData []byte) []byte {
-	fmt.Println("cc",string(jsonData))
-	var requestData DashboardPost
-	err := json.Unmarshal(jsonData,&requestData)
-	if err != nil{
-		fmt.Println("errr=",err)
+	StartTime,EndTime := utils.TvHourTimeUnix()
+	dbR := dataTypeStruck.TvRequest{
+		c.City,
+		c.Id,
+		StartTime,
+		EndTime,
 	}
-	fmt.Println("ddd:",requestData.Id)
-	return requestData.Update()
+	if c.Id == 3 {
+		ResponeByte := dao.Get(dbR)
+		_ = json.Unmarshal(ResponeByte,&ResponeData)
+		data.Data = ResponeData
+		return data
+
+	} else if c.Id == 4 {
+		ResponeByte := dao.Get(dbR)
+		_ = json.Unmarshal(ResponeByte,&diskData)
+		data.Data = diskData
+		return data
+	}
+	ResponeByte := dao.Get(dbR)
+	_ = json.Unmarshal(ResponeByte,&ResponeData)
+	dataList := trend.TrendActive(ResponeData,c.Id)
+	DataRespone = make(map[string][]dataTypeStruck.TrendRespone)
+	for _,v := range dataList {
+		if _, ok := DataRespone[v.HostName]; ok{
+			DataRespone[v.HostName] = append(DataRespone[v.HostName],v)
+		}else {
+			DataRespone[v.HostName] = []dataTypeStruck.TrendRespone{v}
+		}
+
+	}
+
+	data.Data = DataRespone
+
+	return data
 }
+
+
+//type dbRequest dataTypeStruck.TvRequest
+
+//
+//func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
+//	StartTime,EndTime := utils.TvHourTimeUnix()
+//	switch c.Id {
+//	case 1:
+//		var dbR dataTypeStruck.TvRequest
+//		var jsonData dataTypeStruck.TrendDashboardRespone
+//		dbR.KeyName = c.City
+//		dbR.Type = 1
+//		dbR.StartTime = StartTime
+//		dbR.EndTime = EndTime
+//		list := dao.Get(dbR)
+//		data := trend.Cpu(list)
+//		jsonData.Data = data
+//		return jsonData
+//
+//	case 2:
+//	case 3:
+//	case 4:
+//
+//
+//	}
+//
+//
+//}
