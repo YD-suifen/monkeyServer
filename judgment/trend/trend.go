@@ -1,6 +1,7 @@
 package trend
 
 import (
+	"fmt"
 	"monkeyServer/dao"
 	"monkeyServer/dataTypeStruck"
 	"monkeyServer/utils"
@@ -35,6 +36,8 @@ func TrendActive(sourceData []dataTypeStruck.Respone,Type int) []dataTypeStruck.
 		break
 	}
 
+	fmt.Println("sourceData len=",len(sourceData))
+
 	for _, v := range sourceData{
 		stendData := dao.TvSelectStendData(tableName,v.HostName,v.TimeUnix - 86400)
 
@@ -67,6 +70,7 @@ func TrendActive(sourceData []dataTypeStruck.Respone,Type int) []dataTypeStruck.
 			disRespone = append(disRespone,disData)
 		}
 	}
+	fmt.Println("disRespone len=",len(disRespone))
 	return disRespone
 }
 
@@ -88,7 +92,7 @@ func ac(a int) int {
 	}else if a > 3 && a <= 5 {
 		return 2
 	}
-	return a
+	return 0
 }
 func ad(a int) int {
 	if a > 2 && a <= 3 {
@@ -96,7 +100,7 @@ func ad(a int) int {
 	}else if a > 3 && a <= 5 {
 		return 4
 	}
-	return a
+	return 0
 }
 
 //func (c *Respone) Check(max,min float64) int {

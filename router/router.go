@@ -14,6 +14,7 @@ func RegistRouter()  {
 	dashboard := r.Group("/dashboard")
 	{
 		dashboard.POST("/trend",api.Trend)
+		dashboard.GET("/alarm",api.Alarm)
 	}
 	r.Run(":9534")
 }

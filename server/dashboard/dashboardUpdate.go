@@ -25,7 +25,7 @@ func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
 	var ResponeData []dataTypeStruck.Respone
 	var data dataTypeStruck.TrendDashboardRespone
 	var diskData []dataTypeStruck.DiskRespone
-	var DataRespone map[string][]dataTypeStruck.TrendRespone
+	//var DataRespone map[string][]dataTypeStruck.TrendRespone
 
 	StartTime,EndTime := utils.TvHourTimeUnix()
 	dbR := dataTypeStruck.TvRequest{
@@ -37,19 +37,39 @@ func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
 	if c.Id == 3 {
 		ResponeByte := dao.Get(dbR)
 		_ = json.Unmarshal(ResponeByte,&ResponeData)
-		data.Data = ResponeData
+
+		DataRespone := make(map[string][]dataTypeStruck.Respone)
+		for _,v := range ResponeData {
+			if _, ok := DataRespone[v.HostName]; ok{
+				DataRespone[v.HostName] = append(DataRespone[v.HostName],v)
+			}else {
+				DataRespone[v.HostName] = []dataTypeStruck.Respone{v}
+			}
+		}
+		data.Data = DataRespone
 		return data
 
 	} else if c.Id == 4 {
 		ResponeByte := dao.Get(dbR)
 		_ = json.Unmarshal(ResponeByte,&diskData)
-		data.Data = diskData
+
+		DataRespone := make(map[string][]dataTypeStruck.DiskRespone)
+		for _,v := range diskData {
+			if _, ok := DataRespone[v.HostName]; ok{
+				DataRespone[v.HostName] = append(DataRespone[v.HostName],v)
+			}else {
+				DataRespone[v.HostName] = []dataTypeStruck.DiskRespone{v}
+			}
+		}
+		data.Data = DataRespone
 		return data
 	}
+
+
 	ResponeByte := dao.Get(dbR)
 	_ = json.Unmarshal(ResponeByte,&ResponeData)
 	dataList := trend.TrendActive(ResponeData,c.Id)
-	DataRespone = make(map[string][]dataTypeStruck.TrendRespone)
+	DataRespone := make(map[string][]dataTypeStruck.TrendRespone)
 	for _,v := range dataList {
 		if _, ok := DataRespone[v.HostName]; ok{
 			DataRespone[v.HostName] = append(DataRespone[v.HostName],v)
@@ -64,6 +84,9 @@ func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
 	return data
 }
 
+func mapStructData()  {
+	
+}
 
 //type dbRequest dataTypeStruck.TvRequest
 

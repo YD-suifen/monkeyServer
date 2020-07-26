@@ -44,3 +44,10 @@ func Yesterday() string {
 	return nowday
 
 }
+
+func BeMin() int64 {
+	times := time.Now().Unix() - 60
+	times = times - times % 60
+	return times
+
+}

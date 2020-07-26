@@ -31,7 +31,7 @@ func Algorithm()  {
 		algorithmCPU1(TodayTimeUnix,v)
 		algorithmMEM1(TodayTimeUnix,v)
 
-		time.Sleep(time.Millisecond * 20)
+		time.Sleep(time.Second * 1)
 	}
 }
 
