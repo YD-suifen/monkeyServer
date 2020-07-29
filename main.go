@@ -7,6 +7,7 @@ import (
 	"monkeyServer/router"
 	"monkeyServer/utils"
 	"monkeyServer/server/Task"
+	"monkeyServer/server/alarm"
 	"os"
 )
 
@@ -40,6 +41,7 @@ func main() {
 	utils.InitRedisConfigs(C)
 	logUtils.SugarLogger.Info("config init ok")
 	Task.Task()
+	go alarm.AlarmActive()
 
 	fmt.Println("aaa",utils.Config.Master,utils.Config.Port,utils.Config.DB.DbHost,utils.Config.Tasks.Trend)
 	logUtils.SugarLogger.Info("host ColleData start")

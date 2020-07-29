@@ -2,6 +2,7 @@ package alarm
 
 import (
 	"encoding/json"
+	"fmt"
 	"monkeyServer/dao"
 	"monkeyServer/dataTypeStruck"
 	"monkeyServer/messagechan"
@@ -13,16 +14,15 @@ type SData dataTypeStruck.NoAlarmInfo
 type DData dataTypeStruck.AlarmInfo
 //type ByteS []byte
 
-func init()  {
-	go AlarmActive()
-}
+//func init()  {
+//	go AlarmActive()
+//}
 
 func AlarmActive()  {
 
-	time.Sleep(time.Second * 60)
-
-
+	time.Sleep(time.Second * 30)
 	for  {
+		fmt.Println("check AlarmActive")
 		time.Sleep(time.Second * 60)
 		times := utils.BeMin()
 		byteListData := dao.AlarmSelect(times)
@@ -46,6 +46,7 @@ func (c *SData) Get() {
 	switch c.Type {
 	case 1:
 		var sCpu []dataTypeStruck.NoAlarmCpu
+		var Odata []dataTypeStruck.AlarmInfo
 		jsonData,_ := json.Marshal(c.Data)
 		_ = json.Unmarshal(jsonData,&sCpu)
 		for _, v := range sCpu{
@@ -53,16 +54,20 @@ func (c *SData) Get() {
 				continue
 			}
 			Ddata := dataTypeStruck.AlarmInfo{}
+			Ddata.KeyName = v.KeyName
 			Ddata.HostName = v.HostName
 			Ddata.Type = c.Type
 			Ddata.State = false
 			Ddata.Used = v.Used
 			Ddata.TimeUnix = v.TimeUnix
-			messagechan.AlarmInfoChan <- Ddata
+			Odata = append(Odata,Ddata)
 		}
+		messagechan.AlarmInfoChan <- Odata
+		break
 
 	case 2:
 		var sCpu []dataTypeStruck.NoAlarmMem
+		var Odata []dataTypeStruck.AlarmInfo
 		jsonData,_ := json.Marshal(c.Data)
 		_ = json.Unmarshal(jsonData,&sCpu)
 		for _, v := range sCpu{
@@ -71,12 +76,16 @@ func (c *SData) Get() {
 			}
 			Ddata := dataTypeStruck.AlarmInfo{}
 			Ddata.HostName = v.HostName
+			Ddata.KeyName = v.KeyName
 			Ddata.Type = c.Type
 			Ddata.State = false
 			Ddata.Used = v.Used
 			Ddata.TimeUnix = v.TimeUnix
-			messagechan.AlarmInfoChan <- Ddata
+			Odata = append(Odata,Ddata)
+
 		}
+		messagechan.AlarmInfoChan <- Odata
+		break
 	case 3:
 
 	}
@@ -84,7 +93,7 @@ func (c *SData) Get() {
 }
 
 func alarmDataActive(value float64) bool {
-	if value > 70  || value <= 0 {
+	if value > 60  || value <= 0 {
 		return false
 	}
 	return true

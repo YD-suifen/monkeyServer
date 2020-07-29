@@ -22,6 +22,7 @@ type NoAlarmTcp struct {
 
 type AlarmInfo struct {
 	HostInfo
+	KeyName string `json:"keyName"`
 	Used float64
 	Type int
 	State bool
