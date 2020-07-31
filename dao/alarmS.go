@@ -30,7 +30,7 @@ func CpuAlarm(times int64) []byte {
 
 	var dataList []dataTypeStruck.NoAlarmCpu
 	sql := fmt.Sprintf("select hostName,keyName,usedCpu,timeUnix from monkey_s_cpudata where timeUnix = %v",times)
-	logUtils.Debugf("cpuAlarm sql=%v",sql)
+	//logUtils.Debugf("cpuAlarm sql=%v",sql)
 
 	if err := db.Select(&dataList,sql);err != nil{
 		logUtils.Errorf("cpuAlarm Time=%v,error=%v",times,err)
@@ -49,7 +49,7 @@ func MemAlarm(times int64) []byte {
 
 	var dataList []dataTypeStruck.NoAlarmMem
 	sql := fmt.Sprintf("select hostName,keyName,used,timeUnix from monkey_s_memdata where timeUnix = %v",times)
-	logUtils.Debugf("memAlarm sql=%v",sql)
+	//logUtils.Debugf("memAlarm sql=%v",sql)
 
 	if err := db.Select(&dataList,sql);err != nil{
 		logUtils.Errorf("memAlarm Time=%v,error=%v",times,err)
@@ -87,7 +87,7 @@ func TcpnetAlarm(times int64) []byte {
 
 	var dataList []dataTypeStruck.NoAlarmTcp
 	sql := fmt.Sprintf("select hostName,keyName,allConn,timeUnix from monkey_s_tcpnetdata where timeUnix = %v",times)
-	logUtils.Debugf("tcpnetAlarm sql=%v",sql)
+	//logUtils.Debugf("tcpnetAlarm sql=%v",sql)
 
 	if err := db.Select(&dataList,sql);err != nil{
 		logUtils.Errorf("tcpnetAlarm Time=%v,error=%v",times,err)

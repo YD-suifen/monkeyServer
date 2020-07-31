@@ -38,7 +38,7 @@ func tvSelectCpu(keyName string,startTime,endTime int64) []byte {
 	var data []dataTypeStruck.CpuRespone
 
 	sql := fmt.Sprintf("select hostName,usedCpu,timeUnix from monkey_s_cpudata where keyName = '%v' and timeUnix >= %v and timeUnix < %v",keyName,startTime,endTime)
-	logUtils.Debugf("tvSelectCpu sql=%v",sql)
+	//logUtils.Debugf("tvSelectCpu sql=%v",sql)
 
 	if err := db.Select(&data,sql);err != nil{
 		logUtils.Errorf("TvSelectCpu keyName=%v,startTime=%v,error=%v",keyName,startTime,err)
@@ -107,8 +107,8 @@ func TvSelectStendData(tableName, hostName string,timeUnix int64) dataTypeStruck
 	defer db.Close()
 	var data dataTypeStruck.StandData
 	sql := fmt.Sprintf("select hostName,keyName,maValue,miValue,timeUnix from %v where hostName = '%v' and timeUnix = %v",tableName,hostName,timeUnix)
-	logUtils.Debugf("TvSelectStendData sql=",sql)
-	fmt.Println(sql)
+	//logUtils.Debugf("TvSelectStendData sql=",sql)
+	//fmt.Println(sql)
 
 	if err := db.Get(&data, sql); err != nil {
 		logUtils.Error("tvSelectStendData tableName=%v,hostName=%v,timeUnix=%v,error=%v", tableName,hostName,timeUnix, err)

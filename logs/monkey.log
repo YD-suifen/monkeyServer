@@ -59,3 +59,16 @@
 2020-07-26T14:47:23.914+0800	INFO	monkeyServer/main.go:47	host ColleData start
 2020-07-26T14:47:54.095+0800	INFO	logUtils/logs.go:15	read alarmInfo
 2020-07-26T14:50:09.042+0800	ERROR	logUtils/logs.go:26	mysql connect error=dial tcp 172.16.204.173:3306: connect: operation timed out
+2020-07-29T11:32:54.244+0800	INFO	monkeyServer/main.go:34	log init ok
+2020-07-29T11:32:54.257+0800	INFO	monkeyServer/main.go:42	config init ok
+2020-07-29T11:32:54.261+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-29T11:32:54.262+0800	INFO	monkeyServer/main.go:47	host ColleData start
+2020-07-29T11:34:22.261+0800	INFO	monkeyServer/main.go:34	log init ok
+2020-07-29T11:34:22.263+0800	INFO	monkeyServer/main.go:42	config init ok
+2020-07-29T11:34:22.263+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-29T11:34:22.264+0800	INFO	monkeyServer/main.go:47	host ColleData start
+2020-07-29T11:34:35.837+0800	INFO	logUtils/logs.go:15	read alarmInfo
+2020-07-30T16:11:02.880+0800	INFO	monkeyServer/main.go:34	log init ok
+2020-07-30T16:11:02.882+0800	INFO	monkeyServer/main.go:42	config init ok
+2020-07-30T16:11:02.882+0800	INFO	logUtils/logs.go:15	init Crontab
+2020-07-30T16:11:02.882+0800	INFO	monkeyServer/main.go:47	host ColleData start

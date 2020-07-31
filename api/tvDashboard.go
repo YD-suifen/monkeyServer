@@ -28,3 +28,25 @@ func Alarm(c *gin.Context) {
 		c.JSON(http.StatusOK,gin.H{"state":false})
 	}
 }
+
+
+
+func AreaDash(c *gin.Context)  {
+	data, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil{
+		c.JSON(http.StatusOK,gin.H{"error":err})
+	}else {
+		jsonData := dashboard.AreaGetInfo(data)
+		c.JSON(http.StatusOK, jsonData)
+	}
+}
+
+func HostDash(c *gin.Context)  {
+	data, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil{
+		c.JSON(http.StatusOK,gin.H{"error":err})
+	}else {
+		jsonData := dashboard.HostGetInfo(data)
+		c.JSON(http.StatusOK, jsonData)
+	}
+}

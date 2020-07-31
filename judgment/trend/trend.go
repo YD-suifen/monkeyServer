@@ -1,11 +1,11 @@
 package trend
 
 import (
-	"fmt"
 	"monkeyServer/dao"
 	"monkeyServer/dataTypeStruck"
 	"monkeyServer/utils"
 	"strconv"
+	"sync"
 )
 
 type State struct {
@@ -16,9 +16,11 @@ type State struct {
 
 
 var DataMap map[string]State
+var RWmutex *sync.RWMutex
 
 func init()  {
 	DataMap = make(map[string]State)
+	RWmutex  = &sync.RWMutex{}
 }
 
 
@@ -36,7 +38,7 @@ func TrendActive(sourceData []dataTypeStruck.Respone,Type int) []dataTypeStruck.
 		break
 	}
 
-	fmt.Println("sourceData len=",len(sourceData))
+	//fmt.Println("sourceData len=",len(sourceData))
 
 	for _, v := range sourceData{
 		stendData := dao.TvSelectStendData(tableName,v.HostName,v.TimeUnix - 86400)
@@ -45,11 +47,15 @@ func TrendActive(sourceData []dataTypeStruck.Respone,Type int) []dataTypeStruck.
 		disData.TimeUnix = v.TimeUnix
 		disData.Used = v.Used
 
+		RWmutex.Lock()
+		defer RWmutex.Unlock()
 		if i := av(v.Used,stendData.MinValue,stendData.MinValue); i == 0{
+
 			delete(DataMap,v.HostName+"up"+typeString)
 			delete(DataMap,v.HostName+"down"+typeString)
 			disData.State = 0
 			disRespone = append(disRespone,disData)
+
 		}else if i == 1 {
 			if k, ok := DataMap[v.HostName+"up"+typeString]; ok {
 				k.Count += 1
@@ -70,7 +76,7 @@ func TrendActive(sourceData []dataTypeStruck.Respone,Type int) []dataTypeStruck.
 			disRespone = append(disRespone,disData)
 		}
 	}
-	fmt.Println("disRespone len=",len(disRespone))
+	//fmt.Println("disRespone len=",len(disRespone))
 	return disRespone
 }
 

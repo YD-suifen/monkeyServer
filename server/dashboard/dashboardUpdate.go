@@ -25,7 +25,6 @@ func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
 	var ResponeData []dataTypeStruck.Respone
 	var data dataTypeStruck.TrendDashboardRespone
 	var diskData []dataTypeStruck.DiskRespone
-	//var DataRespone map[string][]dataTypeStruck.TrendRespone
 
 	StartTime,EndTime := utils.TvHourTimeUnix()
 	dbR := dataTypeStruck.TvRequest{
@@ -82,10 +81,6 @@ func (c *RequestTred) TrendRequest() dataTypeStruck.TrendDashboardRespone {
 	data.Data = DataRespone
 
 	return data
-}
-
-func mapStructData()  {
-	
 }
 
 //type dbRequest dataTypeStruck.TvRequest
